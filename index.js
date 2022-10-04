@@ -8,10 +8,14 @@ const app = express()
 
 const conn = require('./db/conn')
 
+// chamada dos models
+const Pensamento = require('./models/Pensamento')
+const User = require('./models/User')
+
 
 // configuração da template engine
 app.engine('handlebars', exphbs.engine())
-app.use('view engine', 'handlebars')
+app.set('view engine', 'handlebars')
 
 // configuração para receber dados do body
 app.use(express.urlencoded({
