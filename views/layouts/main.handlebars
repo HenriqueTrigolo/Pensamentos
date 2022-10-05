@@ -20,7 +20,11 @@
             <li><a href="/registrar">Registrar</a></li>
         </ul>
     </nav>
-
+    {{#if messages.message}}
+        <div class="message">
+            {{messages.message}}
+        </div>
+    {{/if}}
     <div class="container">
         {{{body}}}
     </div>

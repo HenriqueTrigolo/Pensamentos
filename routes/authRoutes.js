@@ -7,5 +7,6 @@ const { route } = require('./pensamentosRoutes')
 
 router.get('/login', AuthController.login)
 router.get('/registrar', AuthController.register)
+router.post('/registrar', AuthController.registerPost)
 
 module.exports = router
