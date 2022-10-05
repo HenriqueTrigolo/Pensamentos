@@ -73,6 +73,7 @@ app.use('/', authRoutes)
 app.get('/', PensamentoController.showPensamentos)
 
 conn.sync()
+    //.sync({force:true})
     .then(() => {
         app.listen(3000)
     })
