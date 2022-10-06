@@ -13,11 +13,20 @@ module.exports = class PensamentoController {
             search = req.query.search
         }
 
+        let order = 'DESC'
+
+        if(req.query.order === 'old'){
+            order = 'ASC'
+        }else{
+            order = 'DESC'
+        }
+
         const pensamentosData = await Pensamento.findAll({
             include: User,
             where: {
                 title: {[Op.like]: `%${search}%`},
             },
+            order: [['createdAT', order]]
         })
 
         const todosPensamentos = pensamentosData.map((result) => result.get({plain: true}))
