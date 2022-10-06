@@ -22,7 +22,6 @@ module.exports = class PensamentoController {
 
         const pensamentos = user.Pensamentos.map((result) => result.dataValues)
 
-        console.log(pensamentos)
         res.render('pensamentos/dashboard', {pensamentos})
     }
 
