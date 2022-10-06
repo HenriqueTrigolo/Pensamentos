@@ -47,4 +47,21 @@ module.exports = class PensamentoController {
             console.log(err)
         }
     }
+
+    static async remove(req, res){
+        const id = req.body.id
+        const userId = req.session.userid
+
+        try {
+            await Pensamento.destroy({where: {id: id, UserId: userId}})
+
+            req.flash('message', "Pensamento excluído com sucesso!")
+
+            req.session.save(() => {
+                res.redirect('/pensamentos/dashboard')
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
