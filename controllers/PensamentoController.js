@@ -22,7 +22,13 @@ module.exports = class PensamentoController {
 
         const pensamentos = user.Pensamentos.map((result) => result.dataValues)
 
-        res.render('pensamentos/dashboard', {pensamentos})
+        let pensamentosVazios = false
+
+        if(pensamentos.length === 0 ){
+            pensamentosVazios = true
+        }
+
+        res.render('pensamentos/dashboard', {pensamentos, pensamentosVazios})
     }
 
     static createPensamento(req, res){
