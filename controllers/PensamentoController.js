@@ -8,7 +8,22 @@ module.exports = class PensamentoController {
     }
 
     static async dashboard(req, res){
-        res.render('pensamentos/dashboard')
+        const userId = req.session.userid
+
+        const user = await User.findOne({
+            where: {id: userId},
+            include: Pensamento,
+            plain: true,
+        })
+
+        if(!user){
+            res.redirect('/login')
+        }
+
+        const pensamentos = user.Pensamentos.map((result) => result.dataValues)
+
+        console.log(pensamentos)
+        res.render('pensamentos/dashboard', {pensamentos})
     }
 
     static createPensamento(req, res){
