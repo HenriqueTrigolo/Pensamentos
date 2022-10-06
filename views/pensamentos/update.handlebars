@@ -1,0 +1,13 @@
+<div class="pensamento-form-container">
+    <a href="/pensamentos/dashboard">Voltar</a>
+    <h1>Atualizar o pensamento:</h1>
+    
+    <form action="/pensamentos/update" method="post">
+        <input type="hidden" name="id" value="{{pensamento.id}}">
+        <div class="form-control">
+            <label for="title">Título:</label>
+            <input type="text" name="title" value="{{pensamento.title}}" required>
+        </div>
+        <input type="submit" value="Atualizar">
+    </form>
+</div>

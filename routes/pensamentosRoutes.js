@@ -10,6 +10,8 @@ const checkAuth = require('../helpers/auth').checkAuth
 
 router.get('/add', checkAuth, PensamentoController.createPensamento)
 router.post('/add', checkAuth, PensamentoController.createPensamentoSave)
+router.get('/update/:id', checkAuth, PensamentoController.updatePensamento)
+router.post('/update', checkAuth, PensamentoController.updatePensamentoSave)
 router.post('/remove', checkAuth, PensamentoController.remove)
 router.get('/dashboard', checkAuth, PensamentoController.dashboard)
 router.get('/', PensamentoController.showPensamentos)

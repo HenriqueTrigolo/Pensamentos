@@ -54,6 +54,36 @@ module.exports = class PensamentoController {
         }
     }
 
+    static async updatePensamento(req, res){
+        const id = req.params.id
+
+        const pensamento = await Pensamento.findOne({where: {id: id}, raw: true})
+
+        res.render('pensamentos/update', {pensamento})
+    }
+
+    static async updatePensamentoSave(req, res){
+        
+        const id = req.body.id
+
+        const pensamento = {
+            title: req.body.title
+        }
+        try {
+            await Pensamento.update(pensamento, {where: {id: id}})
+
+            req.flash('message', "Pensamento atualizado com sucesso!")
+
+            req.session.save(() => {
+                res.redirect('/pensamentos/dashboard')
+            })
+        } catch (err) {
+            console.log(err)
+        }
+        
+
+    }
+
     static async remove(req, res){
         const id = req.body.id
         const userId = req.session.userid
