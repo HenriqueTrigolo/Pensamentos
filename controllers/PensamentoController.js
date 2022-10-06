@@ -2,16 +2,33 @@ const session = require('express-session')
 const Pensamento = require('../models/Pensamento')
 const User = require('../models/User')
 
+const {Op} = require('sequelize')
+
 module.exports = class PensamentoController {
     static async showPensamentos(req, res){
 
+        let search = ''
+
+        if(req.query.search){
+            search = req.query.search
+        }
+
         const pensamentosData = await Pensamento.findAll({
             include: User,
+            where: {
+                title: {[Op.like]: `%${search}%`},
+            },
         })
 
         const todosPensamentos = pensamentosData.map((result) => result.get({plain: true}))
 
-        res.render('pensamentos/home', {todosPensamentos})
+        let pensamentosQTY = todosPensamentos.length
+
+        if(pensamentosQTY === 0){
+            pensamentosQTY = false
+        }
+
+        res.render('pensamentos/home', {todosPensamentos, search, pensamentosQTY})
     }
 
     static async dashboard(req, res){
