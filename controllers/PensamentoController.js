@@ -9,4 +9,8 @@ module.exports = class PensamentoController {
     static async dashboard(req, res){
         res.render('pensamentos/dashboard')
     }
+
+    static createPensamento(req, res){
+        res.render('pensamentos/create')
+    }
 }

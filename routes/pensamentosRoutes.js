@@ -8,6 +8,7 @@ const checkAuth = require('../helpers/auth').checkAuth
 
 // controller
 
+router.get('/add', checkAuth, PensamentoController.createPensamento)
 router.get('/dashboard', checkAuth, PensamentoController.dashboard)
 router.get('/', PensamentoController.showPensamentos)
 
